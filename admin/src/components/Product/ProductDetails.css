@@ -1,0 +1,126 @@
+.ProductDetails {
+  margin-top: 25px;
+  padding: 80px;
+  padding-top: 15px;
+  background-color: var(--LightBack-color);
+}
+.GobackDetail {
+  display: flex;
+  justify-content: flex-end;
+}
+.DetailContainer {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  margin-top: 20px;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.DetailImage,
+.DetailDiscription {
+  margin: 10px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.DetailImage {
+  margin: 40px;
+  width: 100%;
+  padding-top: 10px;
+  border-right: none;
+  padding-bottom: 40px;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.imgSrcDetail {
+  border: 6px solid black;
+  border-radius: 5px;
+}
+
+.DetailDiscription {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 20px;
+}
+
+.DetailDiscriptionSpan {
+  line-height: 1.5;
+  font-size: xx-large;
+  font-weight: 500;
+}
+
+.DetailDiscriptionPara {
+  margin-top: 0;
+  text-align: left;
+}
+
+.product-rating,
+.DetailPrice,
+.DetailsButton {
+  padding: 20px;
+  padding-left: 0;
+}
+
+.Votes {
+  font-size: large;
+  font-weight: bold;
+}
+
+.DetailPrice {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.Inclusive {
+  padding-left: 10px;
+  font-size: large;
+  font-weight: bold;
+}
+.detailbutton {
+  display: inline-flex;
+}
+
+.CompleteDiscription {
+  margin-top: 40px;
+  background-color: #d4cece;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  text-align: left;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.slide {
+  height: 50%;
+  padding: 10px;
+  padding-top: 0;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+}
+.thumb {
+  height: 80px;
+  margin-right: 15px;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+}
+.CompleteDiscription p {
+  font-size: 20px;
+}

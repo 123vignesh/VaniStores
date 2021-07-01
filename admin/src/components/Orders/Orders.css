@@ -1,0 +1,11 @@
+.Ord {
+  width: 300px;
+}
+.AlignOrderButton {
+  display: flex;
+  justify-content: center;
+}
+
+.Ord:hover {
+  width: 302px;
+}

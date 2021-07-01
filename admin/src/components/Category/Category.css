@@ -1,0 +1,73 @@
+.AllignTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 400px;
+  background-color: var(--LightBack-color);
+}
+
+::placeholder {
+  color: #413e3e;
+}
+
+button,
+select {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 3px solid black;
+  font-size: large;
+  outline: none;
+  background-color: var(--Secondary-color);
+}
+
+button:disabled {
+  background-color: lightgray;
+}
+
+.AddNew {
+  cursor: pointer;
+
+  background: var(--Tertiary-color);
+  border: none;
+  padding: 12px 25px;
+  font-size: 1.6em;
+  font-weight: 650;
+  color: var(--Quarterinary-color);
+  border-radius: 7px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.AddNew:active {
+  transform: scale(0.97);
+}
+
+.AllignButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fontContainer {
+  display: flex;
+
+  flex-direction: row;
+}
+
+.fontDelEdit {
+  padding: 10px;
+  font-size: 20px;
+  color: black;
+  cursor: pointer;
+}
+
+.fontDelEdit:hover {
+  color: var(--LightTable-color);
+}
+
+.AllignCreate {
+  display: flex;
+  justify-content: center;
+}

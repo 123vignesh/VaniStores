@@ -1,0 +1,148 @@
+.HeaderSection {
+  width: 100%;
+  height: fit-content;
+  box-shadow: 0 1rem 1rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.1rem 0rem #ffffff66 inset, 0 0.2rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.App-header {
+  width: 100%;
+}
+
+.HeaderFonts {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.StoreLogo {
+  width: 80px;
+  height: 80px;
+  background-image: url(../VaniStoresImage.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 100%;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.HeaderButton {
+  cursor: pointer;
+  width: 180px;
+  background: var(--Quarterinary-color);
+  border: none;
+  padding: 15px;
+  font-size: 1.2em;
+  font-weight: 650;
+  color: #ffffff;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.HeaderButton:hover {
+  width: 182px;
+}
+.NotSignedHidden {
+  display: none;
+}
+
+.SignedUser {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  border: 5px solid #131212;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+}
+.SignedUser:hover {
+  cursor: pointer;
+  box-shadow: 0 1rem 1.5rem 0 #12151a,
+    0 -0.25rem 1.8rem var(--Secondary-color) inset,
+    0 0.79rem 0.5rem #ffffff66 inset,
+    0 0.3rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.KeepVisible {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  padding: 20px;
+  font-size: larger;
+  font-weight: 600;
+  line-height: 3.5;
+  background-color: var(--Tertiary-color);
+  min-width: 250px;
+  box-shadow: 0 1rem 1rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.1rem 0rem #ffffff66 inset, 0 0.2rem 0.5rem 0 var(--Primary-color) inset;
+  z-index: 1;
+}
+.dropdown-content li:hover {
+  cursor: pointer;
+  background-color: var(--Quarterinary-color);
+  width: 100%;
+  float: left;
+  color: #ffffff;
+  box-shadow: 0 1rem 1rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.1rem 0rem #ffffff66 inset, 0 0.2rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.KeepVisible:hover .dropdown-content {
+  display: flex;
+}
+
+.visi{
+  display: block;
+}
+
+.NonVisi{
+  display:none
+}
+
+.sideBar {
+  background-image: linear-gradient(
+    180deg,
+    var(--Primary-color),
+    var(--Tertiary-color),
+    var(--Secondary-color)
+  );
+
+  min-width: 250px;
+  padding-top: 40px;
+  border: 0.1rem solid var(--Quarterinary-color);
+}
+
+.sidebarList {
+  color: var(--Quarterinary-color);
+  padding: 10px;
+  font-size: 17px;
+  font-weight: 630;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sidebarList:hover {
+  color: var(--Selecting-color);
+  padding: 15px;
+}
+
+.menuList {
+  padding-top: 80px;
+  padding-left: 55px;
+}

@@ -1,0 +1,46 @@
+.CartCollection {
+  padding: 80px;
+  margin-top: 20px;
+  background-color: var(--LightBack-color);
+}
+
+.CartCard {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 55px;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.CartImage {
+}
+
+.DetailCart {
+  padding-top: 20px;
+  padding-left: 50px;
+  text-align: left;
+}
+
+.productRating {
+  margin-bottom: 20px;
+}
+
+.productRating,
+.DetailPriceCart,
+.DetailsButtonCart {
+  padding: 0;
+}
+
+.DetailPriceCart {
+  font-size: 30px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.NoItem {
+  height: 100vh;
+  font-size: xx-large;
+}

@@ -1,0 +1,103 @@
+.SignupSection {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 20px;
+  padding-bottom: 80px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--LightBack-color);
+}
+
+.StoreCard {
+  width: 100px;
+  height: 100px;
+  background-image: url(../../VaniStoresImage.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 100%;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+  margin-bottom: 25px;
+}
+
+.SignupForm {
+  padding: 40px;
+
+  border-radius: 10px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  background-image: linear-gradient(
+    180deg,
+    var(--Primary-color),
+    var(--Tertiary-color),
+    var(--Secondary-color)
+  );
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.StoreCard {
+  padding-right: 10px;
+}
+
+.SignupInputs {
+  font-size: large;
+  font-weight: 600;
+  outline: none;
+  min-width: 350px;
+  min-height: 25px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.1rem 0rem #ffffff66 inset, 0 0.2rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.SignupButton {
+  cursor: pointer;
+  width: 250px;
+  background: var(--Quarterinary-color);
+  border: none;
+  padding: 15px;
+  padding-right: 25px;
+  padding-left: 25px;
+  font-size: 1.2em;
+  font-weight: 650;
+  color: #ffffff;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.SignupButton:hover {
+  width: 252px;
+}
+
+.PageChange {
+  display: flex;
+  padding: 10px;
+  margin-top: 10px;
+  height: fit-content;
+  font-size: x-large;
+  font-weight: 650;
+  cursor: pointer;
+  color: var(--Quarterinary-color);
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.1rem 0rem #ffffff66 inset, 0 0.2rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.PageChange:hover {
+  color: #1285d8;
+}

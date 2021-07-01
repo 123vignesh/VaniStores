@@ -1,0 +1,23 @@
+.react-responsive-modal-modal {
+  background-color: var(--Tertiary-color);
+  border-radius: 20px;
+}
+.ModalForm {
+  display: flex;
+  padding: 50px;
+  flex-direction: column;
+  background-color: var(--Tertiary-color);
+}
+
+.orderModal {
+  padding: 10px;
+  min-height: 300px;
+}
+.react-responsive-modal-closeButton {
+  background-color: var(--Tertiary-color);
+  font-size: x-large;
+}
+
+::placeholder {
+  font-size: medium;
+}
