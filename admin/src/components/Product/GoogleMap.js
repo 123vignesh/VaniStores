@@ -217,7 +217,7 @@ export default class GoogleMaps extends Component {
                     <input value={this.state.address} placeholder="Address" className="SignupInputs loca" />
                 </div>
                 <MapWithAMarker
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlELdCDd8CRoQr-ukhh4CzGh_r_Q5BJRU&v=3.exp&libraries=geometry,drawing,places"
+                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=************&v=3.exp&libraries=geometry,drawing,places"
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `350px` }} />}
                     mapElement={<div style={{ height: `100%` }} />}
