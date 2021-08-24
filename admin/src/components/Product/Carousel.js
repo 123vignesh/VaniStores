@@ -4,7 +4,7 @@ export default class Carousels extends Component {
 
 
     render() {
-        console.log(this.props.children)
+
         return (
 
             <Carousel>

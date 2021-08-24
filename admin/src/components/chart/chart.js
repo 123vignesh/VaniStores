@@ -11,15 +11,22 @@ const Chart = () => {
       border: 6px solid #bdbdbd;
       background-clip: border-box;
       border-radius: 1rem;
-      min-width: 1000px;
+      min-width: 1200px;
       height: 480px;
       padding-bottom:100px;
+      @media (min-width: 768px) {
+        min-width: 700px;
+      }
+     
+      @media (min-width: 1024px) {
+        min-width: 1200px;
+      }
     `;
 
 
     let s = 100
     const data = []
-    const name = ["Prod1", "Prod2", "Prod3", "Prod4", "Prod5", "Prod6", "Prod7", "Prod8", "Prod9", "Prod10", "Prod11", "Prod12", "Prod13", "Prod14", "Prod15", "Prod16", "Prod17", "Prod18", "Prod19", "Prod20", "Prod21", "Prod22", "Prod23", "Prod24"]
+    const name = ["2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040"]
     for (let i = 0; i < name.length; i++) {
         data.push({
             name: name[i],
@@ -28,8 +35,8 @@ const Chart = () => {
         })
     }
     const bars = [
-        { key: "a", fill: "#008080" },
-        { key: "b", fill: "#212022" }
+        { key: "a", fill: "var(--Tertiary-color)" },
+        { key: "b", fill: "var(--Secondary-color)" }
     ]
     return (
         <>
@@ -37,7 +44,7 @@ const Chart = () => {
             <StyledWrapper>
 
                 <StyledCard>
-                    <h2 style={{ color: "#008080", fontSize: "30px" }}>Products Statistic</h2>
+                    <h2 style={{ color: "var(--Tertiary-color)", fontSize: "30px" }}>Subscribers</h2>
                     <ChartLayout
                         bars={bars}
                         data={data}

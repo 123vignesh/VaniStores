@@ -4,12 +4,14 @@ import SimpleReactValidator from 'simple-react-validator';
 import styled from "styled-components";
 import "./Product.css"
 import TextEditor from '../TextEditor/TextEditor';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
 
 import Select from "react-select"
 import IconStyling from '../../styleFunctions';
-
+import { Engineeringoptions } from "../Orders/options";
 const axios = require('axios').default;
 
 export default class AddProduct extends Component {
@@ -38,8 +40,12 @@ export default class AddProduct extends Component {
             imgc: "",
             isUpload: false,
             isUpload2: false,
-            isUpload3: false
-
+            isUpload3: false,
+            subCategoryInput: false,
+            subCategory: "",
+            subCategoryFinal: "",
+            productCaption: "",
+            selectEngOption: Engineeringoptions,
 
         }
         this.validator = new SimpleReactValidator()
@@ -83,7 +89,15 @@ export default class AddProduct extends Component {
         }
     }
 
+    notifySuccessAdded = () => toast.success("Product Added", {
+        position: toast.POSITION.TOP_RIGHT
+    }, { autoClose: 15000 });
 
+    handleSubCategory = () => {
+        this.setState({
+            subCategoryInput: true
+        })
+    }
 
     handleSubmit = () => {
         if (this.validator.allValid()) {
@@ -92,7 +106,10 @@ export default class AddProduct extends Component {
             let formData = new FormData()
 
             formData.append('Category', this.state.Category)
+
+            formData.append('subCategory', this.state.subCategoryFinal)
             formData.append('productName', this.state.productName)
+            formData.append('productCaption', this.state.productCaption)
             formData.append('productDiscription', childelement.state.content)
             formData.append('productPrice', this.state.productPrice)
             formData.append('gst', this.state.gst)
@@ -103,17 +120,6 @@ export default class AddProduct extends Component {
             formData.append('mainImage', this.state.imgb)
             formData.append('mainImage', this.state.imgc)
 
-            /* formData = {
-                 Category: this.state.Category,
-                 productName: this.state.productName,
-                 productDiscription: childelement.state.content,
-                 productPrice: this.state.productPrice,
-                 gst: this.state.gst,
-                 stock: this.state.stock,
-                 imgData: this.state.imgSrc
-             }
-             console.log(formData)
- */
             let url = `http://localhost:5000/category/${this.state.catId}/products`
             axios({
                 method: 'post',
@@ -122,8 +128,37 @@ export default class AddProduct extends Component {
 
             })
                 .then((result) => {
-                    console.log(result);
-                    console.log("Product created")
+                    if (result.status === 200) {
+                        this.notifySuccessAdded()
+                        this.setState({
+
+                            catId: "",
+                            Category: "",
+                            CategoryLabel: "",
+                            productName: "",
+                            productPrice: "",
+                            stock: "",
+                            gst: "",
+                            productDiscription: "",
+                            imgSrc: "imageupload.png",
+                            imgFile: null,
+                            img1: "",
+                            img2: "",
+                            img3: "",
+                            imga: "",
+                            imgb: "",
+                            imgc: "",
+                            isUpload: false,
+                            isUpload2: false,
+                            isUpload3: false,
+                            subCategoryInput: false,
+                            subCategory: "",
+                            subCategoryFinal: "",
+                            productCaption: "",
+                            selectEngOption: Engineeringoptions,
+
+                        })
+                    }
                 }).catch((err) => {
                     console.log(err)
                 })
@@ -283,6 +318,9 @@ export default class AddProduct extends Component {
 
                         </div>
                     </div>
+
+
+
                     <div className="ProductForm">
 
                         <Select
@@ -293,6 +331,10 @@ export default class AddProduct extends Component {
                                     CategoryLabel,
                                     Category: CategoryLabel.label,
                                     catId: CategoryLabel.value
+                                }, () => {
+                                    if (this.state.Category === "Engineering") {
+                                        this.handleSubCategory()
+                                    }
                                 })
                             }}
                             onBlur={() => this.validator.showMessageFor('CategoryLabel')}
@@ -302,6 +344,22 @@ export default class AddProduct extends Component {
                         <div style={{ color: "#E75922", marginBottom: "5px" }}>
                             {this.validator.message('CategoryLabel', this.state.CategoryLabel, 'required')}
                         </div>
+
+                        <Select
+                            className={this.state.subCategoryInput ? "subvis" : "subinvis"}
+                            value={this.state.subCategory}
+                            options={this.state.selectEngOption}
+                            onChange={subCategory => {
+                                this.setState({
+                                    subCategory,
+                                    subCategoryFinal: subCategory.label
+                                })
+                            }}
+
+                            placeholder={<div style={{ color: "black" }}>Select The SubCategory</div>}
+                            styles={IconStyling.SelectOption}
+                        />
+
                         <div style={{ marginBottom: "5px" }}>
                             <input
                                 type="text"
@@ -319,6 +377,23 @@ export default class AddProduct extends Component {
                             <div style={{ color: "#E75922" }}>
                                 {this.validator.message('productName', this.state.productName, 'required')}
                             </div>
+                        </div>
+
+                        <div style={{ marginBottom: "5px" }}>
+                            <input
+                                type="text"
+                                placeholder="Product Caption" className="SignupInputs Pro"
+                                required
+
+                                value={this.state.productCaption}
+                                onChange={(e) => {
+                                    this.setState({
+                                        productCaption: e.target.value
+                                    })
+                                }}
+
+                            />
+
                         </div>
                         <div style={{ marginBottom: "5px" }}>
                             <input type="text" placeholder="Product Price in ₹" className="SignupInputs Pro"
@@ -368,8 +443,6 @@ export default class AddProduct extends Component {
                                 {this.validator.message('gst', this.state.gst, 'required|size:15')}
                             </div>
                         </div>
-
-
                         <div className="ProductTextEditor">
                             <TextEditor ref={this.ChildElement} />
                         </div>

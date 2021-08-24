@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 
-import './Signup.css'
 import SimpleReactValidator from 'simple-react-validator';
-const axios = require('axios').default;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
+import './Signup.css'
+
+import { notifySuccess, notifyFailure } from '../../NotifyFunctions';
+import { signupUrl } from '../../Link';
+import { PostFunction } from '../../AxiosFunctions.js'
 
 
 export default class Signup extends Component {
@@ -16,7 +21,8 @@ export default class Signup extends Component {
             lastName: "",
             mobileNumber: "",
             email: "",
-            password: ""
+            password: "",
+            showPassword: false
         }
         this.validator = new SimpleReactValidator(
             {
@@ -27,11 +33,13 @@ export default class Signup extends Component {
                             return validator.helpers.testRegex(val, /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i) && params.indexOf(val) === -1
                         },
 
-                        required: true  // optional
+                        required: true
                     }
                 }
             });
     }
+
+
 
     handleSubmit = (e) => {
         if (this.validator.allValid()) {
@@ -43,26 +51,20 @@ export default class Signup extends Component {
                 password: this.state.password
             }
 
-            axios.post(`http://localhost:5000/users/signup`, SignUpData)
+            let result = PostFunction(SignUpData, signupUrl)
+
+            result
                 .then((result) => {
                     if (result.data.success) {
-                        alert("User Successfully Registered")
+                        notifySuccess("Registered Successfully");
                         this.props.history.push('/login')
+                    } else {
+                        notifyFailure("Registration Failed")
                     }
-                    else {
-
-                        alert(result.data.err.message)
-                        this.setState({
-                            firstName: "",
-                            lastName: "",
-                            mobileNumber: "",
-                            email: "",
-                            password: ""
-                        })
-                    }
-                }).catch((error) => {
-                    console.log(error)
+                }).catch((err) => {
+                    notifyFailure(err)
                 })
+
         } else {
             this.validator.showMessages();
 
@@ -71,6 +73,16 @@ export default class Signup extends Component {
 
         e.preventDefault()
     }
+
+    handleClickShowPassword = () => {
+        this.setState({
+            showPassword: !this.state.showPassword
+        })
+    }
+
+    handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
 
     render() {
@@ -81,34 +93,41 @@ export default class Signup extends Component {
                 <section className="SignupSection">
 
                     <form className="SignupForm">
-                        <div className="StoreCard">
 
-                        </div>
+                        <div className="StoreCard"></div>
 
-                        <div style={{ marginBottom: "5px" }}>
-                            <input type="text" className="SignupInputs"
+                        <div className="InputDiv">
+
+                            <input
+                                type="text"
+                                className="SignupInputs"
                                 value={this.state.firstName}
-                                placeholder="First Name" onChange={
+                                placeholder="First Name"
+                                onChange={
                                     (e) => {
                                         this.setState({
                                             firstName: e.target.value
                                         })
                                     }
                                 }
+                                onBlur={() => this.validator.showMessageFor('firstName')}
+                            />
 
-
-                                onBlur={() => this.validator.showMessageFor('firstName')} />
-                            <div style={{ color: "#E75922" }}>
+                            <div className="ErrorMessage">
                                 {this.validator.message('firstName', this.state.firstName, 'required|alpha')}
                             </div>
 
 
                         </div>
 
-                        <div style={{ marginBottom: "5px" }}>
-                            <input type="text" className="SignupInputs"
+                        <div className="InputDiv">
+
+                            <input
+                                type="text"
+                                className="SignupInputs"
                                 value={this.state.lastName}
-                                placeholder="Last Name" required
+                                placeholder="Last Name"
+                                required
                                 onChange={
                                     (e) => {
                                         this.setState({
@@ -119,15 +138,20 @@ export default class Signup extends Component {
 
                                 onBlur={() => this.validator.showMessageFor('lastName')}
                             />
-                            <div style={{ color: "#E75922" }}>
+
+                            <div className="ErrorMessage">
                                 {this.validator.message('lastName', this.state.lastName, 'required|alpha')}
                             </div>
                         </div>
 
-                        <div style={{ marginBottom: "5px" }}>
-                            <input type="tel" className="SignupInputs"
+                        <div className="InputDiv">
+
+                            <input
+                                type="tel"
+                                className="SignupInputs"
                                 value={this.state.mobileNumber}
-                                placeholder="Mobile No" required
+                                placeholder="Mobile No"
+                                required
                                 onChange={
                                     (e) => {
                                         this.setState({
@@ -139,15 +163,19 @@ export default class Signup extends Component {
                                 onBlur={() => this.validator.showMessageFor('mobileNumber')}
                             />
 
-                            <div style={{ color: "#E75922" }}>
+                            <div className="ErrorMessage">
                                 {this.validator.message('mobileNumber', this.state.mobileNumber, 'required|phone')}
                             </div>
                         </div>
 
-                        <div style={{ marginBottom: "5px" }}>
-                            <input type="email" className="SignupInputs"
+                        <div className="InputDiv">
+
+                            <input
+                                type="email"
+                                className="SignupInputs"
                                 value={this.state.email}
-                                placeholder="Email" required
+                                placeholder="Email"
+                                required
                                 onChange={
                                     (e) => {
                                         this.setState({
@@ -160,15 +188,20 @@ export default class Signup extends Component {
                                 onBlur={() => this.validator.showMessageFor('email')}
                             />
 
-                            <div style={{ color: "#E75922" }}>
+                            <div className="ErrorMessage">
                                 {this.validator.message('email', this.state.email, 'required|email')}
                             </div>
                         </div>
 
-                        <div style={{ marginBottom: "5px" }}>
-                            <input type="password" className="SignupInputs"
-                                value={this.state.password}
-                                placeholder="Password" required
+                        <div className=" passwordInput InputDiv">
+
+                            <FontAwesomeIcon icon={this.state.showPassword ? faEye : faEyeSlash} className="PasswordIcon" onClick={
+                                this.handleClickShowPassword} />
+                            <input
+                                className="SignupInputs"
+                                type={this.state.showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                required
                                 onChange={
                                     (e) => {
                                         this.setState({
@@ -176,9 +209,12 @@ export default class Signup extends Component {
                                         })
                                     }
                                 }
+
                                 onBlur={() => this.validator.showMessageFor('password')}
+
+
                             />
-                            <div style={{ color: "#E75922 " }}>
+                            <div className="ErrorMessage">
                                 {this.validator.message('password', this.state.password, 'required|password')}
                             </div>
 

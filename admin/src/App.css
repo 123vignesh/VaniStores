@@ -8,6 +8,13 @@
   --Table-color: #a8a88b;
   --LightBack-color: #ddddd9;
   --LightTable-color: #c0c038;
+  --Error-color: #E75922;
+  --color-primary: #6b7a8f;
+  --color-secondary: #101118;
+  --color-accent: #1d1f2f;
+  --color-focus: #6d64f7;
+  --base-duration: 600ms;
+  --base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
 }
 
 .App {
@@ -16,13 +23,12 @@
   width: 100%;
   min-height: 100%;
 }
+
 .App-header {
-  background-image: linear-gradient(
-    45deg,
-    var(--Primary-color),
-    var(--Tertiary-color),
-    var(--Secondary-color)
-  );
+  background-image: linear-gradient(45deg,
+      var(--Primary-color),
+      var(--Tertiary-color),
+      var(--Secondary-color));
 }
 
 .Main {
@@ -44,13 +50,13 @@
   text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-}
+@media (prefers-reduced-motion: no-preference) {}
 
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

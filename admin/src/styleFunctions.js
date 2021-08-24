@@ -59,7 +59,7 @@ var IconStyling = {
         control: () => ({
 
             marginBottom: "25px",
-            padding: "15px",
+            padding: "10px",
             border: "1px solid var(--Quarterinary-color)",
             backgroundColor: "white",
             borderRadius: "10px",

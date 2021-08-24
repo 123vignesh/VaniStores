@@ -26,24 +26,26 @@
 
 .SignupForm {
   padding: 40px;
-
   border-radius: 10px;
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: center;
-  background-image: linear-gradient(
-    180deg,
-    var(--Primary-color),
-    var(--Tertiary-color),
-    var(--Secondary-color)
-  );
+  background-image: linear-gradient(180deg,
+      var(--Primary-color),
+      var(--Tertiary-color),
+      var(--Secondary-color));
   box-shadow: 0 1rem 1.25rem 0 #12151a,
     0 -0.25rem 1.5rem var(--Secondary-color) inset,
     0 0.75rem 0.5rem #ffffff66 inset,
     0 0.25rem 0.5rem 0 var(--Primary-color) inset;
 }
+
+.InputDiv {
+  margin-bottom: 5px;
+}
+
 
 .StoreCard {
   padding-right: 10px;
@@ -78,11 +80,14 @@
   border-radius: 7px;
   cursor: pointer;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .SignupButton:hover {
   width: 252px;
 }
+
+
 
 .PageChange {
   display: flex;
@@ -99,5 +104,213 @@
 }
 
 .PageChange:hover {
-  color: #1285d8;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+
+
+.passwordInput {
+  position: relative;
+}
+
+.PasswordIcon {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  left: 345px;
+  padding-top: 20px;
+}
+
+.ErrorMessage {
+  color: var(--Error-color)
+}
+
+
+
+/* Media query  */
+
+@media only screen and (max-width: 600px) {
+  .SignupSection {
+    padding-left: 0px;
+
+  }
+
+  .SignupForm {
+    padding: 22px;
+  }
+
+
+
+  .SignupInputs {
+    min-width: 260px;
+    min-height: 15px;
+    padding: 10px;
+  }
+
+  .PasswordIcon {
+    left: 250px;
+    padding-top: 15px;
+  }
+
+  .SignupButton {
+    width: 150px;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .PageChange {
+    padding: 8px;
+    font-size: large;
+    font-weight: 600;
+  }
+
+  .StoreCard {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+
+@media only screen and (min-width: 600px) {
+
+  .SignupSection {
+    padding-left: 20px;
+  }
+
+  .SignupInputs {
+    min-width: 300px;
+    min-height: 15px;
+    padding: 10px;
+  }
+
+  .PasswordIcon {
+    left: 285px;
+    padding-top: 15px;
+  }
+
+  .SignupButton {
+    width: 200px;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .PageChange {
+    padding: 8px;
+    font-size: large;
+    font-weight: 600;
+  }
+
+  .StoreCard {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+  .SignupSection {
+    padding-left: 20px;
+  }
+
+  .SignupInputs {
+    min-width: 300px;
+    min-height: 15px;
+    padding: 10px;
+  }
+
+  .PasswordIcon {
+    left: 285px;
+    padding-top: 15px;
+  }
+
+  .SignupButton {
+    width: 200px;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .PageChange {
+    padding: 8px;
+    font-size: large;
+    font-weight: 600;
+  }
+
+  .StoreCard {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+
+@media only screen and (min-width: 992px) {
+  .SignupSection {
+    padding-left: 20px;
+  }
+
+  .SignupInputs {
+    min-width: 350px;
+    min-height: 25px;
+    padding: 15px;
+  }
+
+  .SignupButton {
+    width: 250px;
+    padding: 15px;
+
+  }
+
+
+  .PasswordIcon {
+    left: 345px;
+    padding-top: 20px;
+  }
+
+  .PageChange {
+    padding: 10px;
+    font-size: x-large;
+    font-weight: 650;
+  }
+
+  .StoreCard {
+    width: 100px;
+    height: 100px;
+  }
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .SignupSection {
+    padding-left: 20px;
+  }
+
+  .SignupInputs {
+    min-width: 350px;
+    min-height: 25px;
+    padding: 15px;
+  }
+
+  .PasswordIcon {
+    left: 345px;
+    padding-top: 20px;
+  }
+
+  .PageChange {
+    padding: 10px;
+    font-size: x-large;
+    font-weight: 650;
+  }
+
+  .SignupButton {
+    width: 250px;
+    padding: 15px;
+
+  }
+
+  .StoreCard {
+    width: 100px;
+    height: 100px;
+  }
 }

@@ -2,12 +2,6 @@ import React, { Component } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
-import ModalForm from '../Table/Modal';
-
-const axios = require('axios').default;
-
-/*    */
-
 
 
 export default class ActionFonts extends Component {
@@ -20,10 +14,7 @@ export default class ActionFonts extends Component {
         }
     }
 
-    componentDidMount() {
 
-
-    }
     render() {
 
 

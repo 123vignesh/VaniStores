@@ -7,6 +7,13 @@ var ProductSchema = new Schema({
     productName: {
         type: String,
     },
+    productCaption: {
+        type: String
+    },
+    subCategory: {
+        type: String,
+        default: "General"
+    },
     productDiscription: {
         type: String,
         required: true

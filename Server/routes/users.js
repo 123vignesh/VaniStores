@@ -2,13 +2,17 @@ var express = require('express');
 var router = express.Router();
 var User = require('../model/User')
 var authenticate = require('../Authenticate')
-
+var jwt = require('jsonwebtoken')
+var nodemailer = require('nodemailer');
 router.use(express.json())
 
 var passport = require('passport')
 
 /* GET users listing. */
-router.get('/signup', function (req, res, next) {
+
+let JWT_SECRET = "shruthi@127"
+
+router.get('/', function (req, res, next) {
   User.find({}).then((result) => {
     res.json(result)
   }).catch((err) => {
@@ -72,4 +76,88 @@ router.delete('/signup', function (req, res, next) {
   })
 });
 
+
+
+
+router.post('/forgotpassword', (req, res) => {
+  User.find({ email: req.body.email })
+    .then((result) => {
+
+      if (result) {
+        const secret = JWT_SECRET + result.password;
+        const payload = {
+          email: result.email,
+          id: result[0]._id
+        }
+        const token = jwt.sign(payload, secret, { expiresIn: '15m' })
+
+        const link = `http://localhost:3000/resetpassword/${result[0]._id}/${token}`
+
+        var transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: 'vigneshmsmg2000@gmail.com',
+            pass: 'surviva@1279'
+          }
+        });
+        var mailOptions = {
+          from: 'vigneshmsmg2000@gmail.com',
+          to: 'vigneshmsmg2000@gmail.com',
+          subject: 'Link to reset password',
+          html: `<h1>Click on this link to Reset your password</h1><p>${link}</p>`
+        }
+
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json({ message: "Link has been sent to your registered email" });
+
+          }
+        });
+
+
+
+
+      } else {
+        res.json("User Doesn't excist")
+      }
+
+
+    }).catch((err) => {
+      return next(err)
+    })
+})
+
+
+
+router.post('/reset-password/:id/:token', (req, res) => {
+
+  let originalString = req.params.id
+  let Id = originalString.replace(':', '');
+  if (req.params.token) {
+    User.findById(Id)
+      .then(function (sanitizedUser) {
+        if (sanitizedUser) {
+          sanitizedUser.setPassword(req.body.confirmPassword, function () {
+            sanitizedUser.save();
+            res.status(200).json({ message: 'password reset successful' });
+          });
+        } else {
+          res.status(500).json({ message: 'This user does not exist' });
+        }
+      }).catch((err) => {
+        console.error(err);
+      })
+
+  } else {
+    res.statusCode = 404;
+    console.log("Error of Expiration");
+  }
+
+
+
+})
 module.exports = router;

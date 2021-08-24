@@ -10,6 +10,9 @@ import IconStyling from '../../styleFunctions'
 
 import "./ProductCard.css"
 import { DataContext } from '../Context'
+import { GetFunction } from '../../AxiosFunctions'
+import { categoryUrl } from '../../Link'
+import { notifyFailure } from '../../NotifyFunctions'
 
 const axios = require('axios').default;
 
@@ -24,94 +27,97 @@ export default class ProductCard extends Component {
 
     }
     static contextType = DataContext;
+
+
     componentDidMount() {
-        axios.get(`http://localhost:5000/category`)
+        let result = GetFunction(categoryUrl)
+
+        result
             .then((response) => {
-                console.log(response.data)
-                var array = []
-                for (let j = 0; j < response.data.length; j++) {
 
-                    if (response.data[j].Products.length > 0) {
+                let array = []
+                for (let j = 0; j < response.length; j++) {
 
-                        for (let k = 0; k < response.data[j].Products.length; k++) {
+                    if (response[j].Products.length > 0) {
 
-                            let data = response.data[j].Products[k];
+                        for (let k = 0; k < response[j].Products.length; k++) {
 
-                            data.Category = response.data[j].Category
-                            data.catId = response.data[j]._id
-                            data.proId = response.data[j].Products[k]._id
+                            let data = response[j].Products[k];
 
+                            data.Category = response[j].Category
+                            data.catId = response[j]._id
+                            data.proId = response[j].Products[k]._id
+
+                            if (k === 0) {
+                                array.push(
+                                    <div style={{ width: "100%" }}>
+                                        <h1>{data.Category}</h1>
+                                    </div>
+
+                                )
+                            }
                             array.push(
-                                <div className="card" >
-                                    <div className="card-head">
+                                <div className="product-card">
+                                    <div className="card-header">
                                         <img src={`http://localhost:5000/${data.mainImage[0].filename}`} alt="Shoe" className="product-img"
                                             width="350px" height="350px" />
                                     </div>
+
+
                                     <div className="card-body">
-                                        <div className="product-desc">
 
-                                            <span className="product-title">
-                                                <b>{data.productName}</b>
-                                                <span class="badge">
-                                                    New
-                                                </span>
-                                            </span>
+                                        <h4 className="product-title">{data.productName}</h4>
 
-                                            <span className="product-rating">
-                                                <FontAwesomeIcon icon={faStar}
-                                                    style={IconStyling.styleListStar}
-                                                />
-                                                <FontAwesomeIcon icon={faStar}
-                                                    style={IconStyling.styleListStar}
-                                                />
-                                                <FontAwesomeIcon icon={faStar}
-                                                    style={IconStyling.styleListStar}
-                                                />
-                                                <FontAwesomeIcon icon={faStar}
-                                                    style={IconStyling.styleListStar}
-                                                />
-                                                <FontAwesomeIcon icon={faStarHalf}
-                                                    style={IconStyling.styleListStar}
-                                                />
+                                        <h3 className="product-price">  ₹{data.productPrice}</h3>
 
-                                            </span>
+                                        <span className="product-rating">
+                                            <FontAwesomeIcon icon={faStar}
+                                                style={IconStyling.styleListStar}
+                                            />
+                                            <FontAwesomeIcon icon={faStar}
+                                                style={IconStyling.styleListStar}
+                                            />
+                                            <FontAwesomeIcon icon={faStar}
+                                                style={IconStyling.styleListStar}
+                                            />
+                                            <FontAwesomeIcon icon={faStar}
+                                                style={IconStyling.styleListStar}
+                                            />
+                                            <FontAwesomeIcon icon={faStarHalf}
+                                                style={IconStyling.styleListStar}
+                                            />
 
-                                        </div>
-                                        <div class="product-properties">
-                                            <span className="product-button1Space">
-
-                                                <Link to={{
-                                                    pathname: "/productdetails",
-                                                    state: { fromProduct: data }
-
-                                                }}
-                                                >
-                                                    <button className="product-button1">View Details</button>
-                                                </Link>
-                                            </span>
-                                            <span >
-                                                <button className="product-button2"
-                                                    onClick={
-                                                        () => this.context.addCart(data)
-
-
-
-
-
-                                                    }
-
-                                                >Add to Cart</button>
-                                            </span>
-
-
-                                            <span >
-                                                <div className="ProductPrice">  ₹<b>{data.productPrice}</b></div>
-
-                                            </span>
-                                        </div>
+                                        </span>
                                     </div>
+
+
+                                    <div className="card-footer">
+                                        <Link to={{
+                                            pathname: "/productdetails",
+                                            state: { fromProduct: data }
+
+                                        }}
+                                        >
+                                            <button className="btns btns-secondary">
+                                                View Details
+                                            </button>
+
+                                        </Link>
+
+
+                                        <button className="btns btns-primary"
+                                            onClick={
+                                                () => this.context.addCart(data)
+
+                                            }
+                                        >
+                                            Add to Cart
+                                        </button>
+                                    </div>
+
                                 </div>
                             )
+
                         }
 
 
@@ -124,7 +130,7 @@ export default class ProductCard extends Component {
 
                 })
             }).catch((err) => {
-                console.log(err)
+                notifyFailure(err)
             });
     }
 

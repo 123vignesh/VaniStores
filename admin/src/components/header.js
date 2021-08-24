@@ -11,7 +11,8 @@ import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { DataContext } from './Context'
 
 
@@ -26,7 +27,9 @@ class HeaderComponent extends Component {
         }
 
     }
-
+    notifySuccessLogout = () => toast.success("Logged-out Successfully", {
+        position: toast.POSITION.TOP_RIGHT
+    }, { autoClose: 1500 });
     render() {
         const { cart, fetchCart } = this.context;
 
@@ -43,7 +46,7 @@ class HeaderComponent extends Component {
 
         let handleLogout = () => {
             this.props.logoutUser()
-
+            this.notifySuccessLogout()
             fetchCart()
 
         }

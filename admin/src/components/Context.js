@@ -26,7 +26,10 @@ export class DataProvider extends Component {
 
                 }
             }).catch((err) => {
-                alert(err)
+                if (err.message !== "Request failed with status code 401") {
+                    alert(err.message)
+                }
+
             })
 
     }

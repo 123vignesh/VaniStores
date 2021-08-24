@@ -12,6 +12,7 @@ export const requestLogin = (creds) => {
 
 
 export const receiveLogin = (response) => {
+
     return {
         type: ActionTypes.LOGIN_SUCCESS,
         token: response.data.token,
@@ -40,8 +41,7 @@ export const loginUser = (creds) => (dispatch) => {
 
     return axios.post(`http://localhost:5000/users/login`, creds)
         .then(response => {
-            console.log("hi buudy")
-            console.log(response)
+
             if (response.statusText === "OK") {
                 return response;
             } else {
@@ -53,7 +53,6 @@ export const loginUser = (creds) => (dispatch) => {
             error => {
                 throw error;
             })
-
         .then(response => {
             if (response.data.success) {
                 // If login was successful, set the token in local storage
@@ -63,6 +62,8 @@ export const loginUser = (creds) => (dispatch) => {
                 // Dispatch the success action
 
                 dispatch(receiveLogin(response));
+
+
             }
             else {
                 var error = new Error('Error ' + response.status);

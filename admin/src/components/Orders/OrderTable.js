@@ -1,21 +1,22 @@
 import React, { Component } from "react";
-import 'react-responsive-modal/styles.css';
-import { toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
-
-import '../Table/ModalForm.css'
-import { Styles } from '../Table/TableStyle'
 import Select from "react-select"
+
 import IconStyling from '../../styleFunctions';
 import Table from "../Table/Table"
-import './Orders.css'
 import ModalForm from "../Table/Modal"
-import "../Table/ModalForm.css"
 import ActionFonts from "../Fonts/ActionFonts"
 
+import 'react-responsive-modal/styles.css';
+import '../Table/ModalForm.css'
+import { Styles } from '../Table/TableStyle'
+import "../Table/ModalForm.css"
+import './Orders.css'
+
+
+import { notifyFailure, notifyInfo, notifySuccess } from '../../NotifyFunctions'
 import { options } from "./options";
 
-toast.configure()
+
 const axios = require('axios').default;
 
 export default class OrderDataTable extends Component {
@@ -35,22 +36,6 @@ export default class OrderDataTable extends Component {
             FinalStatus: ""
         }
     }
-    notify = () => toast.info("Orders fetched Successfully", {
-        position: toast.POSITION.TOP_RIGHT
-    }, { autoClose: 15000 });
-
-    notifyError = (msg) => toast.error(msg, {
-        position: toast.POSITION.TOP_RIGHT
-    }, { autoClose: 15000 });
-
-
-    notifySuccessEdit = () => toast.success("DeliveryStatus updated Successfully", {
-        position: toast.POSITION.TOP_RIGHT
-    }, { autoClose: 15000 });
-
-    notifySuccessDelete = () => toast.success("Order  Successfully deleted", {
-        position: toast.POSITION.TOP_RIGHT
-    }, { autoClose: 15000 })
 
     componentDidMount() {
         const bearer = 'Bearer ' + localStorage.getItem('token');
@@ -86,10 +71,10 @@ export default class OrderDataTable extends Component {
 
 
                 }, () => {
-                    this.notify()
+                    notifySuccess("Orders Fetched Successfully")
                 })
             }).catch((err) => {
-                this.notifyError(err.message)
+                notifyFailure(err.message)
             });
 
     }
@@ -131,7 +116,7 @@ export default class OrderDataTable extends Component {
             ordNoId: this.state.FinalData[j].ordNoId,
 
         }, () => {
-            console.log(this.state.FinalData[j].ordNoId)
+
             var url = `http://localhost:5000/order/${this.state.ordNoId}`
             const bearer = 'Bearer ' + localStorage.getItem('token');
             let headers = {
@@ -142,8 +127,6 @@ export default class OrderDataTable extends Component {
             })
                 .then((result) => {
 
-                    console.log(result)
-                    console.log("Deleted")
                     axios.get(`http://localhost:5000/order`)
                         .then((response) => {
 
@@ -168,13 +151,13 @@ export default class OrderDataTable extends Component {
                             this.setState({
                                 FinalData: array
                             }, () => {
-                                this.notifySuccessDelete()
+                                notifySuccess("Orders Deleted Successfully")
                             })
                         }).catch((err) => {
-                            this.notifyError(err.message)
+                            notifyFailure(err.message)
                         });
                 }).catch((err) => {
-                    this.notifyError(err.message)
+                    notifyFailure(err.message)
                 })
         })
 
@@ -198,14 +181,12 @@ export default class OrderDataTable extends Component {
         })
             .then((result) => {
 
-                console.log(result)
-                console.log("updated")
                 axios.get(`http://localhost:5000/order`, {
                     headers: headers
                 })
                     .then((response) => {
 
-                        var array = []
+                        let array = []
                         for (let j = 0; j < response.data.length; j++) {
 
                             array.push({
@@ -226,13 +207,13 @@ export default class OrderDataTable extends Component {
                         this.setState({
                             FinalData: array
                         }, () => {
-                            this.notifySuccessEdit()
+                            notifySuccess("Edited Successfully")
                         })
                     }).catch((err) => {
-                        this.notifyError(err.message)
+                        notifyFailure(err.message)
                     });
             }).catch((err) => {
-                this.notifyError(err.message)
+                notifyFailure(err.message)
             })
         this.handleClick()
     }
@@ -270,8 +251,6 @@ export default class OrderDataTable extends Component {
 
             },
         ]
-
-
 
         return (
             <>

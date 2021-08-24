@@ -71,3 +71,55 @@ button:disabled {
   display: flex;
   justify-content: center;
 }
+
+.CategoryError {
+  color: var(--Error-color)
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .AddNew {
+
+    padding: 8px 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .AddNew {
+
+    padding: 8px 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+
+}
+
+@media only screen and (min-width: 768px) {
+  .AddNew {
+
+    padding: 8px 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .AddNew {
+
+    padding: 12px 25px;
+    font-size: 1.6em;
+    font-weight: 650;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .AddNew {
+
+    padding: 12px 25px;
+    font-size: 1.6em;
+    font-weight: 650;
+  }
+}

@@ -13,6 +13,7 @@ var authenticate = require('./Authenticate')
 var usersRouter = require('./routes/users');
 var CategoryRouter = require('./routes/CategoryRouter')
 var CartRouter = require('./routes/CartRouter')
+var AddressRouter = require('./routes/AddressRouter')
 var app = express();
 var cors = require('cors');
 const paymentRouter = require('./routes/PaymentRouter');
@@ -31,6 +32,8 @@ const connect = mongoose.connect(url, {
 
 connect.then((db) => {
   console.log('Connected correctly to Mongo server');
+}).catch((err) => {
+  console.log(err.message)
 })
 
 // view engine setup
@@ -58,7 +61,7 @@ app.use('/category', CategoryRouter);
 app.use('/cart', CartRouter);
 app.use('/api', paymentRouter);
 app.use('/order', OrderRouter)
-
+app.use('/address', AddressRouter)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next()

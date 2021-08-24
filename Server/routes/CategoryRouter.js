@@ -1,6 +1,7 @@
 var express = require('express');
 var multer = require('multer')
-
+var path = require('path');
+var fs = require('fs')
 var mongoose = require('mongoose')
 const sharp = require('sharp')
 
@@ -13,6 +14,7 @@ const { ObjectID } = require('mongodb');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
+
         return cb(null, 'public/images')
     },
     filename: (req, file, cb) => {
@@ -49,11 +51,9 @@ CategoryRouter.route('/')
             Category: req.body.Category,
             CategoryDiscription: req.body.CategoryDiscription
         }).then((result) => {
-
-            console.log(result);
             res.statusCode = 200;
             res.setHeader('ContentType', 'application/json')
-            res.json(result)
+            res.json({ Created: true })
         }).catch((err) => {
             console.log(err)
         })
@@ -68,6 +68,63 @@ CategoryRouter.route('/')
         res.send("delete request on Category Router")
 
     })
+
+CategoryRouter.route('/getId')
+    .get((req, res, next) => {
+        Categories.find({})
+            .then((result) => {
+
+                let ids = [];
+                for (let i = 0; i < result.length; i++) {
+                    ids.push({
+                        categoryName: result[i].Category,
+                        categoryId: result[i]._id
+                    })
+                }
+
+                res.statusCode = 200;
+                res.setHeader('ContentType', 'application/json')
+                res.json(ids)
+
+            }, (err) => console.log(err))
+            .catch((err) => {
+                return next(err)
+            })
+    })
+
+CategoryRouter.route('/newBooks')
+    .get((req, res, next) => {
+        Categories.find({})
+            .then((result) => {
+
+                let productsInfo = [];
+                for (let i = 0; i < result.length; i++) {
+                    let prod = result[i].Products;
+
+                    for (let j = 0; j < prod.length; j++) {
+
+                        if (j === result[i].Products.length - 1) {
+
+                            productsInfo.push({
+                                product: prod[j],
+                                productName: prod[j].productName,
+                                fileName: prod[j].mainImage[0].filename
+                            })
+                        }
+
+                    }
+                }
+
+                res.statusCode = 200;
+                res.setHeader('ContentType', 'application/json')
+                res.json(productsInfo)
+
+            }, (err) => console.log(err))
+            .catch((err) => {
+                return next(err)
+            })
+    })
+
 
 CategoryRouter.route('/:catId')
     .get((req, res, next) => {
@@ -86,7 +143,7 @@ CategoryRouter.route('/:catId')
         }).then((result) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
-            res.json(result);
+            res.json({ Updated: true });
         }, (err) => next(err))
             .catch((err) => next(err));
     })
@@ -96,7 +153,7 @@ CategoryRouter.route('/:catId')
             .then((resp) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
-                res.json(resp);
+                res.json({ deleted: true });
             }, (err) => next(err))
             .catch((err) => next(err));
     })
@@ -105,44 +162,61 @@ CategoryRouter.route('/:catId/products')
     .get((req, res, next) => {
         Categories.findById(req.params.catId)
             .then((result) => {
-                console.log(result)
-                res.send(result)
+                res.statusCode = 200;
+                res.setHeader('ContentType', 'application/json')
+                res.json(result)
 
             })
             .catch((err) => next(err))
     })
     .post(upload.array('mainImage', 5), async (req, res, next) => {
-        console.log(req.files)
+        for (let i = 0; i < req.files.length; i++) {
+            await sharp(req.files[i].path)
+                .resize(400, 500)
+                .jpeg({ quality: 50 })
+                .toBuffer()
+                .then(data => {
+                    fs.writeFileSync(req.files[i].path, data);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+
+
+
+
+
+
         Categories.findById(req.params.catId)
-            .then(async (results) => {
+            .then((results) => {
 
-                /*let fileArray = []
-                for (let i = 0; i < req.files.length; i++) {
-                    fileArray.push(sharp(req.files[i].buffer).resize({ width: 500, height: 500 }))
-                }*/
 
-                /* var obj = {
-                     _id: new ObjectID,
-                     Category: req.body.Category,
-                     productName: req.body.productName,
-                     productDiscription: req.body.productDiscription,
-                     productPrice: req.body.productPrice,
-                     gst: req.body.gst,
-                     stock: req.body.stock,
-                     mainImage: req.files,
-                     //imgData: req.body.imgData
-                 }
-         
-         
-                 results.Products.push(obj)
-         
-                 results.save()
-                     .then((result) => {
-                         res.statusCode = 200;
-                         res.setHeader('Content-Type', 'application/json');
-                         res.json(result);
-                     })
-                     .catch((err) => next(err))*/
+                var obj = {
+                    _id: new ObjectID,
+                    Category: req.body.Category,
+                    productName: req.body.productName,
+                    productDiscription: req.body.productDiscription,
+                    productCaption: req.body.productCaption,
+                    subCategory: req.body.subCategory,
+                    productPrice: req.body.productPrice,
+                    gst: req.body.gst,
+                    stock: req.body.stock,
+                    mainImage: req.files,
+                    //imgData: req.body.imgData
+                }
+
+
+                results.Products.push(obj)
+
+                results.save()
+                    .then((result) => {
+                        res.statusCode = 200;
+                        res.setHeader('Content-Type', 'application/json');
+
+                        res.json(result);
+                    })
+                    .catch((err) => next(err))
             })
             .catch((err) => next(err))
     })
@@ -174,7 +248,7 @@ CategoryRouter.route('/:catId/products/:proId')
                         result.Products.id(req.params.proId).productDiscription = req.body.productDiscription
                         result.Products.id(req.params.proId).stock = req.body.stock
                         result.Products.id(req.params.proId).gst = req.body.gst
-                        result.Products.id(req.params.proId).imgData = req.body.imgData
+                        result.Products.id(req.params.proId).mainImage[0] = req.body.imgData
                     }
                     result.save()
                         .then((result) => {

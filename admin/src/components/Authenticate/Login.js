@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-
 import { Link, withRouter } from "react-router-dom";
 
+import SimpleReactValidator from 'simple-react-validator';
+import { DataContext } from '../Context'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 import './login.css'
 import './Signup.css'
-import SimpleReactValidator from 'simple-react-validator';
-import { DataContext } from '../Context'
-const axios = require('axios').default;
+
+import { notifyFailure, notifySuccess } from '../../NotifyFunctions';
+
 
 class Login extends Component {
     static contextType = DataContext;
@@ -16,12 +19,14 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            checked: false
+            showPassword: false
         }
         this.validator = new SimpleReactValidator()
     }
 
-    handlelogin = (e) => {
+
+
+    handlelogin = async (e) => {
         if (this.validator.allValid()) {
 
             let loginData = {
@@ -31,12 +36,23 @@ class Login extends Component {
 
             this.props.loginUser(loginData)
                 .then((result) => {
-                    this.context.fetchCart()
-                    this.props.history.push('/home')
+                    setTimeout(() => {
+                        var a = localStorage.getItem('token');
+
+                        if (a !== null) {
+                            this.props.history.push('/')
+                            notifySuccess("LoggedIn Successfully")
+                        } else {
+
+                            notifyFailure("wrong password or email")
+                        }
+
+                    }, 100)
+
                 }).catch((err) => {
-                    alert(err)
+                    notifyFailure(err.message)
                 })
-            e.preventDefault()
+
         } else {
             this.validator.showMessages();
 
@@ -47,7 +63,18 @@ class Login extends Component {
 
     }
 
+
+
+    handleClickShowPassword = () => {
+        this.setState({
+            showPassword: !this.state.showPassword
+        })
+    }
+
+
+
     render() {
+
         return (
             <>
                 <section className="LoginSection">
@@ -75,8 +102,13 @@ class Login extends Component {
                             </div>
                         </div>
 
-                        <div style={{ marginBottom: "5px" }}>
-                            <input type="password"
+                        <div style={{ marginBottom: "5px" }}
+                            className=" passwordInput"
+                        >
+
+                            <FontAwesomeIcon icon={this.state.showPassword ? faEye : faEyeSlash} className="PasswordIcon" onClick={
+                                this.handleClickShowPassword} />
+                            <input type={this.state.showPassword ? "text" : "password"}
                                 value={this.state.password}
                                 className="SignupInputs" placeholder="Password" required
                                 onChange={
@@ -93,10 +125,14 @@ class Login extends Component {
                             </div>
                         </div>
 
-                        <div>
-                            <input type="checkbox" id="forgot" name="forgot" value={this.state.checked} />
-                            <label style={{ fontSize: "20px", fontWeight: "600" }} for="forgot">Forgot Password?</label>
-                        </div>
+                        <Link to="/forgotpassword" className="linkStyle">
+                            <div className="ForgotPassword">
+                                <span style={{ fontSize: "20px", fontWeight: "600", cursor: "pointer" }}
+
+                                >Forgot Password?</span>
+                            </div>
+                        </Link>
+
 
                         <div>
                             <button type="submit" className="SignupButton"
@@ -109,6 +145,8 @@ class Login extends Component {
                                 Signup ?
                             </div>
                         </Link>
+
+
                     </form>
                 </section>
 

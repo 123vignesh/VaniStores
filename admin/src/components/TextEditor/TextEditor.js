@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-//import { CKEditor } from '@ckeditor/ckeditor5-react';
-//import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 import CKEditor from "react-ckeditor-component";
+
 import './TextEditor.css'
+
 export default class TextEditor extends Component {
     constructor(props) {
         super(props);

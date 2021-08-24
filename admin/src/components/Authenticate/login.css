@@ -15,12 +15,10 @@
   flex-direction: column;
   align-items: center;
   justify-items: center;
-  background-image: linear-gradient(
-    180deg,
-    var(--Primary-color),
-    var(--Tertiary-color),
-    var(--Secondary-color)
-  );
+  background-image: linear-gradient(180deg,
+      var(--Primary-color),
+      var(--Tertiary-color),
+      var(--Secondary-color));
   box-shadow: 0 1rem 1.25rem 0 #12151a,
     0 -0.25rem 1.5rem var(--Secondary-color) inset,
     0 0.75rem 0.5rem #ffffff66 inset,
@@ -34,4 +32,14 @@
     0 -0.25rem 1rem var(--Secondary-color) inset,
     0 0.25rem 0.5rem 0 var(--Primary-color) inset;
   cursor: pointer;
+}
+
+.ForgotPassword:hover {
+  color: #ce2f2f;
+}
+
+@media only screen and (max-width: 600px) {
+  .loginForm {
+    padding: 22px;
+  }
 }

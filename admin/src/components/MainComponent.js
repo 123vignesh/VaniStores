@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 
 import Dashboard from './Dashboard/Dashboard'
 import Category from './Category/Category'
+import Footer from './Footer/Footer'
 import Order from './Orders/Orders';
 import AddProduct from './Product/AddProduct';
 import Signup from './Authenticate/Signup';
 import Login from './Authenticate/Login';
+import Email from './Authenticate/Email'
 import Product from './Product/Product';
 import ProductDetails from './Product/ProductDetails';
 import ProductCart from './Product/ProductCart';
@@ -18,6 +20,8 @@ import Home from './Home/Home';
 import Headers from './header'
 
 import { loginUser, logoutUser } from '../Redux/ActionCreators';
+import SpecificProduct from './Product/SpecificProduct';
+import ResetPassword from './Authenticate/ResetPassword';
 
 
 
@@ -68,9 +72,16 @@ class MainComponent extends Component {
 
                     <Route path="/category" component={Category} />
 
+                    <Route path="/forgotpassword" component={Email} />
+
+                    <Route path="/resetpassword/:id/:token" component={ResetPassword} />
+
+
                     <Route path="/addproduct" component={AddProduct} />
 
                     <Route path="/product" component={Product} />
+
+                    <Route path="/specificproduct" component={SpecificProduct} />
 
                     <Route path="/editproduct" component={EditProduct} />
 
@@ -90,7 +101,7 @@ class MainComponent extends Component {
 
                     <Redirect to="/home" />
                 </Switch>
-
+                <Footer />
             </>
 
         )

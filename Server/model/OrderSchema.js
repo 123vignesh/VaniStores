@@ -19,7 +19,13 @@ var OrderSchema = new Schema({
     DeliveryStatus: {
         type: String,
         default: "Processing"
-    }
+    },
+    city: {
+        type: String
+    },
+    pinCode: {
+        type: String
+    },
 }, {
     timestamps: true
 })

@@ -62,4 +62,36 @@ th{
   .pagination {
     padding: 0.5rem;
   }
+
+  @media only screen and (max-width: 600px) {
+    table{
+      min-width:200px;
+    }    
+  }
+
+@media only screen and (min-width: 600px) {
+
+table{
+  min-width:700px;
+}
+  
+  }
+  
+  @media only screen and (min-width: 768px) {
+    table{
+      min-width:700px;
+    }
+  }
+  
+ @media only screen and (min-width: 992px) {
+  table{
+    min-width:900px;
+  }
+ }
+
+@media only screen and (min-width: 1200px) {
+  table{
+    min-width:1200px;
+  }
+}
 `;

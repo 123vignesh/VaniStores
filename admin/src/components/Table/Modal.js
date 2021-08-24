@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
+
 import { Modal } from 'react-responsive-modal';
 
 import "./ModalForm.css"
-
-const axios = require('axios').default;
-
 
 export default class ModalForm extends Component {
 

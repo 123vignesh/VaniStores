@@ -10,11 +10,16 @@ const authenticate = require('../Authenticate')
 OrderRouter.route('/')
     .get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
 
-        Orders.find({}).then((result) => {
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.json(result)
-        }).catch((err) => next(err))
+        Orders.find({})
+            .then((result) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(result)
+            })
+            .catch((err) => {
+                next(err)
+                res.json(err.message)
+            })
     })
     .post((req, res, next) => {
 

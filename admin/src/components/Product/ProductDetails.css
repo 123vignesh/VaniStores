@@ -4,19 +4,21 @@
   padding-top: 15px;
   background-color: var(--LightBack-color);
 }
+
 .GobackDetail {
   display: flex;
   justify-content: flex-end;
 }
+
 .DetailContainer {
   display: flex;
   justify-content: center;
-  padding-top: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   margin-top: 20px;
   box-shadow: 0 1rem 1.25rem 0 #12151a,
     0 -0.25rem 1.5rem var(--Secondary-color) inset,
-    0 0.75rem 0.5rem #ffffff66 inset,
-    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+    0 0.75rem 0.5rem #ffffff66 inset, 0 0rem 0rem 0 var(--Primary-color) inset;
 }
 
 .DetailImage,
@@ -25,16 +27,16 @@
   margin-left: 0;
   margin-right: 0;
 }
+
 .DetailImage {
-  margin: 40px;
-  width: 100%;
-  padding-top: 10px;
+  width: 900px;
+  height: 650px;
+  margin: 20px;
   border-right: none;
   padding-bottom: 40px;
   box-shadow: 0 1rem 1.25rem 0 #12151a,
     0 -0.25rem 1.5rem var(--Secondary-color) inset,
-    0 0.75rem 0.5rem #ffffff66 inset,
-    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+    0 0.75rem 0.5rem #ffffff66 inset, 0 0rem 0rem 0 var(--Primary-color) inset;
 }
 
 .imgSrcDetail {
@@ -86,6 +88,7 @@
   font-size: large;
   font-weight: bold;
 }
+
 .detailbutton {
   display: inline-flex;
 }
@@ -96,31 +99,93 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px;
+  padding: 50px;
   text-align: left;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset, 0 0rem 0rem 0 var(--Primary-color) inset;
+}
+
+.slide {
+  width: 500;
+  height: 500;
   box-shadow: 0 1rem 1.25rem 0 #12151a,
     0 -0.25rem 1.5rem var(--Secondary-color) inset,
     0 0.75rem 0.5rem #ffffff66 inset,
     0 0.25rem 0.5rem 0 var(--Primary-color) inset;
 }
 
-.slide {
-  height: 50%;
-  padding: 10px;
-  padding-top: 0;
-  box-shadow: 0 1rem 1.25rem 0 #12151a,
-    0 -0.25rem 1.5rem var(--Secondary-color) inset,
-    0 0.75rem 0.5rem #ffffff66 inset,
-    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
-}
 .thumb {
-  height: 80px;
-  margin-right: 15px;
   box-shadow: 0 1rem 1.25rem 0 #12151a,
     0 -0.25rem 1.5rem var(--Secondary-color) inset,
     0 0.75rem 0.5rem #ffffff66 inset,
     0 0.25rem 0.5rem 0 var(--Primary-color) inset;
 }
+
 .CompleteDiscription p {
   font-size: 20px;
+}
+
+/*Button Group*/
+.MuiButtonGroup-root {
+  background-color: #c82930;
+  border-radius: 7px;
+}
+
+.MuiButton-outlinedSizeLarge {
+  padding: 7px 21px;
+  font-size: 18px;
+  color: #ffff;
+}
+
+.MuiButton-outlined {
+  border: 2px solid rgba(0, 0, 0, 0.23);
+  padding: 5px 15px;
+}
+
+.ShippingAddressContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px;
+  background-color: #ffff;
+  height: 600px;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+}
+
+.ShippingAddress {
+  display: flex;
+  flex-direction: column;
+}
+
+.loca {
+  min-width: 340px;
+  margin: 5px;
+}
+
+.wid {
+  width: 94%;
+  margin-top: 10px;
+}
+
+/* Address */
+
+.VisiAddress {
+  display: block;
+  background-color: #ffff;
+  padding: 30px;
+  box-shadow: 0 1rem 1.25rem 0 #12151a,
+    0 -0.25rem 1.5rem var(--Secondary-color) inset,
+    0 0.75rem 0.5rem #ffffff66 inset,
+    0 0.25rem 0.5rem 0 var(--Primary-color) inset;
+  margin-top: 10px;
+  width: 80%;
+}
+
+.NonVisiAddress {
+  display: none
 }
